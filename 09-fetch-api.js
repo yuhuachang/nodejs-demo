@@ -32,11 +32,20 @@ const httpHandler = (_, response) => {
     response.write('  </tr>');
     for (let i = 0; i < json.length; i++) {
       const { Station, Destination, UpdateTime } = json[i];
+
+      const year = UpdateTime.substring(0, 4);
+      const month = UpdateTime.substring(4, 6);
+      const day = UpdateTime.substring(6, 8);
+      const hour = UpdateTime.substring(8, 10);
+      const minute = UpdateTime.substring(10, 12);
+      const second = UpdateTime.substring(12, 14);
+      const t = `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+
       response.write('  <tr>');
       response.write(`    <td>${i}</td>`);
       response.write(`    <td>${Station}</td>`);
       response.write(`    <td>${Destination}</td>`);
-      response.write(`    <td>${UpdateTime}</td>`);
+      response.write(`    <td>${t}</td>`);
       response.write('  </tr>'); 
     }
     response.write('</table>');
