@@ -52,4 +52,13 @@ Use fetch api from client to make ajax call to backend server.
 [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
 is a pub-sub model allowing server to push messages to client.
 - Server keeps the request into the subscriber list, and publish to all subscribers whenever an event happens.
-- Notice the event stream content type and response format.
+- Learn the event stream content type and response format.
+- Learn how to subscribe and event and listen event message.
+
+## 12 More Server Sent Events
+Open an event source, subscribe two different topics and handle them separately.
+- Check the effect if we close the event source from client without notifying the server.
+- Check the way to unsubscribe from server.
+
+Reestablish the connection
+Use the event id

@@ -4,8 +4,11 @@
     <title>Server Sent Events</title>
   </head>
   <body>
-    <h1>Server Sent Events</h1>
-    <div id="messages"></div>
+    <h1 id="sound">Server Sent Events</h1>
+    <div id="dogMsg"></div>
+    <div id="catMsg"></div>
+    <button onclick="evtSource.close()">stop event source from client only (server doesn't know)</button>
+    <button onclick="evtSource.close()">tell server to unsubscribe</button>
     <script>
 
 // Creating an EventSource instance
@@ -16,28 +19,36 @@ evtSource.onopen = event => {
   console.log(event);
 };
 
-// Listening for message events
-// evtSource.addEventListener("event_msg", event => {
-//   console.log("register event type 'event_msg'");
-//   console.log(event);
-// });
+// Subscribe to an event topic
+evtSource.addEventListener("dogEvent", event => {
+  console.log("register event type 'dogEvent'");
+  console.log(event.data);
+  document.getElementById('sound').innerHTML = "Bark!";
+  document.getElementById('dogMsg').innerHTML = event.data;
+});
 
-// evtSource.addEventListener("event_data", event => {
-//   console.log("register event type 'event_data'");
-//   console.log(event);
-// });
+// Subscribe to an event topic
+evtSource.addEventListener("catEvent", event => {
+  console.log("register event type 'catEvent'");
+  console.log(event.data);
+  document.getElementById('sound').innerHTML = "Meow!";
+  document.getElementById('catMsg').innerHTML = event.data;
+});
 
 evtSource.onmessage = event => {
-  console.log("received event type 'myEvent'");
+  console.log("received event ???");
   console.log(event.data);
-  document.getElementById('messages').innerHTML = event.data;
+  // this will not happen.
 };
 
 evtSource.onerror = (err) => {
   console.error("EventSource failed:", err);
 };
 
-
+unsubscribe = () => {
+  console.log("unsubscribe");
+  //evtSource.close();
+};
     </script>
   </body>
 </html>

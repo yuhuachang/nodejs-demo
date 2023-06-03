@@ -6,16 +6,25 @@ const port = 3000;
 
 // event subscribers
 const eventSubscriber = [];
+
 setInterval(() => {
-  const message = `Hello - ${new Date()}`;
-  console.log(`send message to ${eventSubscriber.length} client: ${message}`);
-  
-  // send message to all event subscribers
+  const dogMsg = `Bark - ${new Date()}`;
+  console.log(`send message to ${eventSubscriber.length} clients: ${dogMsg}`);
   eventSubscriber.forEach((response) => {
-    // send event data starting with "data:" and end with an empty line.
-    response.write(`data: ${message}\n\n`);
+    response.write("event: dogEvent\n");
+    response.write(`data: ${dogMsg}\n\n`);
   });
-}, 1000);
+}, 700);
+
+setInterval(() => {
+  console.log(`send message to ${eventSubscriber.length} clients: Meow!`);
+  eventSubscriber.forEach((response) => {
+    response.write("event: catEvent\n");
+    response.write(`data: Meow!\n`); // part1
+    response.write(`data: ${new Date()}\n`); // part2
+    response.write("\n"); // end of data
+  });
+}, 1300);
 
 const httpHandler = (request, response) => {
  
@@ -25,13 +34,12 @@ const httpHandler = (request, response) => {
     // send response header with content type: event-stream
     response.writeHead(200, { 'Content-Type': 'text/event-stream' });
 
-    // send event type in single line.
-    response.write("event: myEvent\n");
-
     // add this session into event subscriber list.
     eventSubscriber.push(response);
 
-    // do not close the response, continue sending event messages...
+  } else if (request.url === '/unsubscribe') {
+    console.log("received client unsubscribe request. remove it");
+
   } else {
     const data = fs.readFileSync('12-more-server-sent-events.html');
     response.writeHead(200, { 'Content-Type': 'text/html' });
