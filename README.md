@@ -49,6 +49,7 @@ Use fetch api to retrieve the governor open data.
 Use fetch api from client to make ajax call to backend server.
 
 ## 11 Server Sent Events
-(Server Sent Events)[https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events]
-is a pub-sub model that server can push message to client.
-
+[Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
+is a pub-sub model allowing server to push messages to client.
+- Server keeps the request into the subscriber list, and publish to all subscribers whenever an event happens.
+- Notice the event stream content type and response format.
