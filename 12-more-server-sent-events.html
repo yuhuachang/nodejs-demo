@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server Sent Events</title>
+  </head>
+  <body>
+    <h1>Server Sent Events</h1>
+    <div id="messages"></div>
+    <script>
+
+// Creating an EventSource instance
+const evtSource = new EventSource("eventsource");
+
+evtSource.onopen = event => {
+  console.log("Connection to server opened.");
+  console.log(event);
+};
+
+// Listening for message events
+// evtSource.addEventListener("event_msg", event => {
+//   console.log("register event type 'event_msg'");
+//   console.log(event);
+// });
+
+// evtSource.addEventListener("event_data", event => {
+//   console.log("register event type 'event_data'");
+//   console.log(event);
+// });
+
+evtSource.onmessage = event => {
+  console.log("received event type 'myEvent'");
+  console.log(event.data);
+  document.getElementById('messages').innerHTML = event.data;
+};
+
+evtSource.onerror = (err) => {
+  console.error("EventSource failed:", err);
+};
+
+
+    </script>
+  </body>
+</html>

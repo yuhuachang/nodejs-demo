@@ -30,7 +30,7 @@ const httpHandler = (request, response) => {
     console.log('building response from file');
     console.log(data);
 
-    if (filename.endsWith('.html')) {
+    if (filename.endsWith('.html') || filename.endsWith('.htm')) {
       response.writeHead(200, { 'Content-Type': 'text/html' });
     } else if (filename.endsWith('.css')) {
       response.writeHead(200, { 'Content-Type': 'text/css' });
