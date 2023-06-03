@@ -34,11 +34,6 @@ More form components.
 Use `Promise`, `async`, and `await` to make asynchronous function synchronous way.
 - Notice the execution order.
 
-event loop
-callback
-single thread
-
-
 ## 8 File Data Store
 Store parameters in local json file.
 - Learn how to save and load data from json file.
@@ -50,4 +45,10 @@ Use fetch api to retrieve the governor open data.
 - Learn how to use Javascript spread operator.
 - Return the correct charset in html can ensure your browser display correctly on Chinese characters.
 
-9 sqlite
+## 10 Long Polling
+Use fetch api from client to make ajax call to backend server.
+
+## 11 Server Sent Events
+(Server Sent Events)[https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events]
+is a pub-sub model that server can push message to client.
+
