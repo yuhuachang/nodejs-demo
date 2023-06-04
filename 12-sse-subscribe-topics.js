@@ -41,7 +41,7 @@ const httpHandler = (request, response) => {
     console.log("received client unsubscribe request. remove it");
 
   } else {
-    const data = fs.readFileSync('12-more-server-sent-events.html');
+    const data = fs.readFileSync('12-sse-subscribe-topics.html');
     response.writeHead(200, { 'Content-Type': 'text/html' });
     response.write(data);
     response.end();

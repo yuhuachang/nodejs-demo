@@ -55,7 +55,7 @@ is a pub-sub model allowing server to push messages to client.
 - Learn the event stream content type and response format.
 - Learn how to subscribe and event and listen event message.
 
-## 12 More Server Sent Events
+## 12 SSE Subscribe Topics
 Open an event source, subscribe two different topics and handle them separately.
 - Check the effect if we close the event source from client without notifying the server.
 - Check the way to unsubscribe from server.
