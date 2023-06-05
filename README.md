@@ -60,5 +60,5 @@ Open an event source, subscribe two different topics and handle them separately.
 - Check the effect if we close the event source from client without notifying the server.
 - Check the way to unsubscribe from server.
 
-Reestablish the connection
-Use the event id
+## 13 SSE Connection Control
+Open and close an event source. Identiy the event by id.
