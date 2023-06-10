@@ -62,3 +62,4 @@ Open an event source, subscribe two different topics and handle them separately.
 
 ## 13 SSE Connection Control
 Open and close an event source. Identiy the event by id.
+- [Ref](https://web.dev/eventsource-basics/)

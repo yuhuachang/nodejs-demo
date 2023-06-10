@@ -32,7 +32,11 @@ const httpHandler = (request, response) => {
     console.log("received client event source connection request. start responding...");
 
     // send response header with content type: event-stream
-    response.writeHead(200, { 'Content-Type': 'text/event-stream' });
+    response.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    });
 
     // send event type in single line.
     response.write("event: myEvent\n");

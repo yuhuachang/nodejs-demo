@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server Sent Events</title>
+  </head>
+  <body>
+    <h1>Server Sent Events</h1>
+    <div>
+      Status:
+      <span id="state"></span>
+    </div>
+    <div id="messages"></div>
+    <div>
+      <button onclick="connect()">Open Connection</button>
+    </div>
+    <div>
+      <button onclick="clientClose()">Close Connection</button> (server doesn't know!)
+    </div>
+    <div>
+      <button onclick="serverClose()">Close Connection</button> (notify server to stop sending.)
+    </div>
+    <script>
+
+// The EventSource instance
+let evtSource = undefined;
+
+const connect = () => {
+  if (evtSource !== undefined) {
+    clientClose();
+  }
+  console.log("Open event source.");
+  evtSource = new EventSource("eventsource");
+
+  evtSource.onopen = eventSrc => {
+    console.log("Connection to server opened.");
+  };
+
+  evtSource.onmessage = event => {
+    console.log(`${event.lastEventId} => ${event.data}`);
+    document.getElementById('messages').innerHTML = `${event.lastEventId}: ${event.data}`;
+  };
+
+  evtSource.onerror = (err) => {
+    console.error("EventSource failed:", err);
+  };
+};
+
+const clientClose = () => {
+  if (evtSource === undefined) {
+    return;
+  }
+  console.log("Close event source.");
+  evtSource.close();
+  evtSource = undefined;
+};
+
+const serverClose = () => {
+  if (evtSource === undefined) {
+    return;
+  }
+  console.log("Disconnect event source.");
+  fetch("/disconnect");
+  clientClose();
+};
+
+const updateState = () => {
+  if (evtSource === undefined) {
+    document.getElementById('state').innerHTML = "N/A";
+    return;
+  }
+  switch (evtSource.readyState) {
+    case 0:
+      document.getElementById('state').innerHTML = "CONNECTING";
+      break;
+    case 1:
+      document.getElementById('state').innerHTML = "OPEN";
+      break;
+    case 2:
+      document.getElementById('state').innerHTML = "CLOSED";
+      break;
+  }
+};
+
+setInterval(() => {
+  updateState();
+}, 250);
+
+    </script>
+  </body>
+</html>
