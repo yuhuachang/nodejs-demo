@@ -1,8 +1,16 @@
 const http = require('http');
+const fs = require('fs');
 
 const port = 3000;
 
 const httpHandler = (_, response) => {
+
+  const data = fs.readFileSync('09.1-fetch-api-front-end.html');
+  response.writeHead(200, { 'Content-Type': 'text/html' });
+  response.write(data)
+  response.end();
+
+  fetchData
 
   fetch('https://tcgmetro.blob.core.windows.net/stationnames/stations.json', {
     method: 'GET',
